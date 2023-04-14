@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/welcomeFragment"
-        android:title=".Bienvenido"
+        android:title=".Suerte"
         android:icon="@drawable/ic_welcome"/>
 
     <item

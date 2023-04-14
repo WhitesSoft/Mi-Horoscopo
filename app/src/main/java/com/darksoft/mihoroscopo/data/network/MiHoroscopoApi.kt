@@ -10,12 +10,11 @@ import retrofit2.http.Query
 
 interface MiHoroscopoApi {
 
-    @POST(".")
+    @POST(".") // Es un punto porque estamos consumiendo la URL directa
     suspend fun getHoroscopo(
         // llamarse igual al url
         @Query("sign") sign: String,
         @Query("day") day: String
     ): Response<HoroscopoResponse>
-
 
 }
