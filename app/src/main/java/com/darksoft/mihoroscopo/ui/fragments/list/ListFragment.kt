@@ -1,5 +1,7 @@
 package com.darksoft.mihoroscopo.ui.fragments.list
 
+import android.content.ClipData.newIntent
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,6 +11,7 @@ import androidx.fragment.app.viewModels
 import com.darksoft.mihoroscopo.R
 import com.darksoft.mihoroscopo.databinding.FragmentListBinding
 import com.darksoft.mihoroscopo.databinding.FragmentLuckyBinding
+import com.darksoft.mihoroscopo.ui.detail.DetailActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -25,16 +28,20 @@ class ListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnVirgo.setOnClickListener {
-            // Abrir detalle
+            openDetail()
         }
 
-        binding.btnVirgo.setOnClickListener {
-            // Abrir detalle
+        binding.btnEscorpio.setOnClickListener {
+            openDetail()
         }
 
-        binding.btnVirgo.setOnClickListener {
-            // Abrir detalle
+        binding.btnSagitario.setOnClickListener {
+            openDetail()
         }
+    }
+
+    private fun openDetail() {
+        startActivity(DetailActivity.abrirActivity(requireContext()))
     }
 
     // Creamos la vista
