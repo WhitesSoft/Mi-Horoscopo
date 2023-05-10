@@ -53,7 +53,8 @@ class DetailActivity : AppCompatActivity() {
                             // Mostrar la informacion
                             binding.loading.isVisible = false
                             //runOnUiThread {  }
-                            Toast.makeText(this@DetailActivity, "Ha funcionado", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@DetailActivity, uiState.horoscopeModel.horoscope
+                                , Toast.LENGTH_SHORT).show()
                         }
                         is DetailUIState.Error -> {
                             // Mostrar el error

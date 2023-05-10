@@ -2,8 +2,10 @@ package com.darksoft.mihoroscopo.ui.detail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.darksoft.mihoroscopo.data.network.MiHoroscopoApi
+import com.darksoft.mihoroscopo.core.network.ResultType
 import com.darksoft.mihoroscopo.domain.GetHoroscopeUseCase
+import com.darksoft.mihoroscopo.domain.dto.HoroscopeDto
+import com.darksoft.mihoroscopo.domain.model.HoroscopeModel
 import com.darksoft.mihoroscopo.ui.detail.model.DetailUIState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -21,14 +23,18 @@ class DetailViewModel @Inject constructor(private val getHoroscopeUseCase: GetHo
     // Obtener el horoscopo
     fun getHoroscope() {
 
-        // Creamos una corutina a nivel del viewModel
+        // Creamos una corrutina a nivel del viewModel
         viewModelScope.launch {
-            getHoroscopeUseCase()
-                .collect{ horoscopo ->
+            getHoroscopeUseCase(HoroscopeDto(sign = "virgo"))
+                .collect{ result: ResultType<HoroscopeModel> ->
                     // Aqui recibimos la informacion, cada cambio que se realice en el flow
-                    if (horoscopo != null) {
-                        // Aqui recibimos la informacion
-                        _uiState.value = DetailUIState.Success(horoscopo)
+                    when(result) {
+                        is ResultType.Error -> {
+                            _uiState.value = DetailUIState.Error(result.msg)
+                        }
+                        is ResultType.Success -> {
+                            _uiState.value = DetailUIState.Success(result.data!!)
+                        }
                     }
                 }
         }

@@ -1,8 +1,9 @@
 package com.darksoft.mihoroscopo.data.network
 
-import com.darksoft.mihoroscopo.data.network.model.HoroscopoResponse
+import com.darksoft.mihoroscopo.data.network.model.HoroscopeResponse
 import retrofit2.Response
-import retrofit2.http.POST
+import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 /* Aqui se haran todas nuestras llamadas, POST, GET, UPDATE, DELETE
@@ -10,11 +11,13 @@ import retrofit2.http.Query
 
 interface MiHoroscopoApi {
 
-    @POST(".") // Es un punto porque estamos consumiendo la URL directa
-    suspend fun getHoroscopo(
+    @GET("/{sign}/")
+    suspend fun getHoroscope(
         // llamarse igual al url
-        @Query("sign") sign: String,
-        @Query("day") day: String
-    ): Response<HoroscopoResponse>
+        @Path("sign") sign: String,
+        @Query("date") date: String,
+        @Query("lang") lang: String
+
+    ): Response<HoroscopeResponse>
 
 }

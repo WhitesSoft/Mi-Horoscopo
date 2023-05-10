@@ -1,19 +1,15 @@
 package com.darksoft.mihoroscopo.domain
 
-import com.darksoft.mihoroscopo.data.network.MiHoroscopoApi
-import com.darksoft.mihoroscopo.data.network.model.HoroscopoResponse
+import com.darksoft.mihoroscopo.core.network.ResultType
+import com.darksoft.mihoroscopo.data.network.HoroscopeRepository
+import com.darksoft.mihoroscopo.domain.dto.HoroscopeDto
+import com.darksoft.mihoroscopo.domain.model.HoroscopeModel
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOf
 import javax.inject.Inject
 
-class GetHoroscopeUseCase @Inject constructor(private val api: MiHoroscopoApi) {
+class GetHoroscopeUseCase @Inject constructor(private val horoscopeRepository: HoroscopeRepository) {
 
-    suspend operator fun invoke(): Flow<HoroscopoResponse?> {
-        val response = api.getHoroscopo("virgo", "today")
-        if (response.isSuccessful) {
-            return flowOf(response.body())
-        }
-        return flowOf(null)
-    }
+    operator fun invoke(horoscopeDto: HoroscopeDto): Flow<ResultType<HoroscopeModel>> =
+        horoscopeRepository.getHoroscope(horoscopeDto)
 
 }
