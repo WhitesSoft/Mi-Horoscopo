@@ -11,6 +11,7 @@ import retrofit2.http.Query
 
 interface MiHoroscopoApi {
 
+    // Trabaja con coroutines
     @GET("/{sign}/")
     suspend fun getHoroscope(
         // llamarse igual al url
@@ -19,5 +20,15 @@ interface MiHoroscopoApi {
         @Query("lang") lang: String
 
     ): Response<HoroscopeResponse>
+
+    // Trabaja con flows
+//    @GET("/{sign}/")
+//    fun getHoroscope(
+//        // llamarse igual al url
+//        @Path("sign") sign: String,
+//        @Query("date") date: String,
+//        @Query("lang") lang: String
+//
+//    ): Response<HoroscopeResponse>
 
 }

@@ -6,7 +6,7 @@ sealed class ResultType<T> {
     data class Success<T>(val data: T?) : ResultType<T>()
     // val example = ResultType.Success<HoroscopeResponse>()
 
-    data class Error<T>(val msg: String) : ResultType<T>()
+    data class Error<T>(val errorType: ErrorType) : ResultType<T>()
     // val example = ResultType.Error<HoroscopeResponse>("Error")
 
     // tambien puede entrar diferentes estados como offline
